@@ -5,12 +5,22 @@
 
     <script>
         function RedirectToPage() {
-            window.location.href = "deskOrder_SelectDesk";
+
+            //读取当前选择器的值
+            const store = document.getElementById('store').value;
+            const type = document.getElementById('type').value;
+
+            //存入本地
+            localStorage.setItem('store', JSON.stringify(store));
+            localStorage.setItem('type', JSON.stringify(type));
+
+            //跳转
+            window.location.href = 'deskOrder_SelectDesk';
         }
     </script>
 
     <style>
-        .SectionSelection{
+        .ContainerSelection{
             height: 150px;
             width:50%;
             border: 1px solid #ccc;
@@ -41,24 +51,24 @@
 
 <body>
 
-<div class="SectionSelection">
+<div class="ContainerSelection">
     <div class="Store">
         <label for="store">请选择门店:</label>
         <select id="store" name="store">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
         </select>
     </div>
 
     <br>
 
     <div class="People">
-        <label for="peopleAmount">请选择人数:</label>
-        <select id="peopleAmount" name="peopleAmount">
-            <option>1-2</option>
-            <option>3-6</option>
-            <option>7-12</option>
+        <label for="type">请选择人数:</label>
+        <select id="type" name="type">
+            <option value="1-2">1-2</option>
+            <option value="3-6">3-6</option>
+            <option value="7-12">7-12</option>
         </select>
     </div>
 
