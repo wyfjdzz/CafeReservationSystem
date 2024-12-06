@@ -3,8 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        let _store = localStorage.getItem('store');
+        let store = JSON.parse(_store);
+        localStorage.removeItem('store');
+
+        let _id = localStorage.getItem('id');
+        let id = JSON.parse(_id);
+        localStorage.removeItem('id');
+
+        let _type = localStorage.getItem('type');
+        let type= JSON.parse(_type);
+        localStorage.removeItem('type');
+
+        let _price= localStorage.getItem('price');
+        let price = JSON.parse(_price);
+        localStorage.removeItem('price');
+
+        console.log(store);
+        console.log(id);
+        console.log(type);
+        console.log(price);
+
+        document.addEventListener('DOMContentLoaded', function()
+        {
+            let textStore = document.getElementById('textStore');
+            textStore.textContent = "store: " + store;
+
+            let textId = document.getElementById('textId');
+            textId.textContent = "id: " + id;
+
+            let textType = document.getElementById('textType');
+            textType.textContent = "type: " + type;
+
+            let textPrice = document.getElementById('textPrice');
+            textPrice.textContent = "price: " + price;
+        });
+
+    </script>
 </head>
 <body>
-
+    <label id="textId"></label>
+    <label id="textStore"></label>
+    <label id="textType"></label>
+    <label id="textPrice"></label>
 </body>
 </html>
