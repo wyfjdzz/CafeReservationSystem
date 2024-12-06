@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>动态下拉菜单示例</title>
+    <script>
+        function updateSelection() {
+            var select = document
+            var selectedValue = select.options[select.selectedIndex].value;
+            // 在这里可以根据 selectedValue 做一些事情，比如更新页面
+            alert('你选择了: ' + selectedValue);
+        }
+    </script>
+</head>
+<body>
+
+<label for="cars">选择一辆车:</label>
+
+<select id="cars" name="cars" onchange="updateSelection()">
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+</select>
+
+</body>
+</html>

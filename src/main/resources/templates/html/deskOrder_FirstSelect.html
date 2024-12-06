@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>deskOrder_FirstSelect</title>
+
+    <script>
+        function RedirectToPage() {
+            window.location.href = "deskOrder_SelectDesk";
+        }
+    </script>
+
+    <style>
+        .SectionSelection{
+            height: 150px;
+            width:50%;
+            border: 1px solid #ccc;
+            background-color: white;
+            margin-top:150px;
+            margin-left: 25%;
+        }
+        .Store{
+            font-size: 24px;
+            text-align: center;
+        }
+        .People{
+            font-size: 24px;
+            text-align: center;
+        }
+        .ButtonConfirm{
+            height:40px;
+            width: 80px;
+            font-size: 24px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="SectionSelection">
+    <div class="Store">
+        <label for="store">请选择门店:</label>
+        <select id="store" name="store">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>
+
+    <br>
+
+    <div class="People">
+        <label for="peopleAmount">请选择人数:</label>
+        <select id="peopleAmount" name="peopleAmount">
+            <option>1-2</option>
+            <option>3-6</option>
+            <option>7-12</option>
+        </select>
+    </div>
+
+</div>
+
+<button class="ButtonConfirm" onclick=RedirectToPage()>确认</button>
+
+
+
+</body>
+</html>
