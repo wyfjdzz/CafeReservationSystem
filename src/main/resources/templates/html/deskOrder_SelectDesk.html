@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>SelectDesk</title>
@@ -71,9 +71,7 @@
         <div class="Store">
             <label for="store">选择门店:</label>
             <select id="store">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <option th:each="storeName : ${allStoreNames}" th:value="${storeName}" th:text="${storeName}" ></option>
             </select>
         </div>
         <div class="People">
@@ -103,17 +101,10 @@
     </table>
 </div>
 
-
-
-    <script>
+    <script th:inline="javascript">
     //数据源
-    const data = [
-        { store: "1", id:"1", type: "1-2", price: "30" },
-        { store: "1", id:"2", type: "3-6", price: "45" },
-        { store: "1", id:"3", type: "3-6", price: "45" },
-        { store: "2", id:"4", type: "7-12", price: "60" },
-
-    ];
+    const data = /*[[${dataList}]]*/ [];
+    console.log(data);
 
     //根据FirstSelect的参数初始化选择框
     function InitializeTable(){

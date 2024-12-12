@@ -17,8 +17,8 @@ public class UserDesk {
   private int price;
   private int orderStatus;
 
-  public int getId() {return orderId;}
-  public void setId(int id) {this.orderId = orderId;}
+  public int getOrderId() {return orderId;}
+  public void setOrderId(int orderId) {this.orderId = orderId;}
 
   public int getUserId() {return userId;}
   public void setUserId(int userId) {this.userId = userId;}
@@ -38,6 +38,6 @@ public class UserDesk {
   public int getPrice() {return price;}
   public void setPrice(int price) {this.price = price;}
 
-  public int getorderStatus() {return orderStatus;}
-  public void setorderStatus(int orderStatus) {this.orderStatus = orderStatus;}
+  public int getOrderStatus() {return orderStatus;}
+  public void setOrderStatus(int orderStatus) {this.orderStatus = orderStatus;}
 }

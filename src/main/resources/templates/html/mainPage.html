@@ -1,75 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
     <head>
         <meta charset="UTF-8">
         <title>cafeSystem</title>
         <style>
-
-            /*Region Lines*/
-            .Separator {
-                width: 100%; /* 分隔线宽度 */
-                height: 2px; /* 分隔线高度 */
-                background-color: #ccc; /* 分隔线颜色 */
-                margin-top: 75px;
-                position: fixed;
-            }
-            .VerticalLine1{
-                float:right;
-                margin-top:75px;
-                width:3px;
-                height:1000px;
-                background: #cccccc;
-                position: fixed;
-                margin-left:400px;
-            }
-            .VerticalLine2{
-                float:right;
-                margin-top:75px;
-                width:3px;
-                height:1000px;
-                background: #cccccc;
-                position: fixed;
-                margin-left:1200px;
-            }
-
 
             /*Region Header*/
 
             .TextLogin{
                 width: 200px; /* 容器最大宽度 */
                 height: 30px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                position: fixed;
-                margin-left:30px;
-                margin-top: 0
             }
             .TextRegister{
                 width: 200px; /* 容器最大宽度 */
                 height: 30px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                position: fixed;
-                margin-left:250px;
-                margin-top: 0
             }
             .TextConnectUs{
                 width: 200px; /* 容器最大宽度 */
                 height: 30px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                position: fixed;
-                margin-left:1200px;
-                margin-top: 0
             }
             .TextHelloUser{
                 width: 200px; /* 容器最大宽度 */
                 height: 30px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                position: fixed;
-                margin-left:1400px;
-                margin-top: 0
             }
 
 
@@ -79,203 +35,35 @@
                 width: 200px;
                 height: 30px;
                 background-color: white;
-                margin-left:10px;
-                margin-top: 80px;
-                position: fixed;
             }
-            .TextSeat1{
-                width: 200px;
-                height: 30px;
-                background-color: white;
-                margin-left:10px;
-                margin-top: 130px;
-                position: fixed;
-            }
-            .ContainerSeat1{
-                width: 200px;
+            .ContainerSeat{
+                width: 400px;
                 height: 150px;
                 border: 1px solid #ccc;
                 background-color: white;
-                margin-left:10px;
-                margin-top: 195px;
-                position: fixed;
-            }
-            .TextSeat2{
-                width: 200px;
-                height: 30px;
-                background-color: white;
-                margin-left:10px;
-                margin-top: 355px;
-                position: fixed;
-            }
-            .ContainerSeat2{
-                width: 200px;
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white;
-                margin-left:10px;
-                margin-top: 410px;
-                position: fixed;
+
             }
             .TextPlayedDeskGame{
                 width: 200px;
                 height: 30px;
                 background-color: white;
-                margin-left:10px;
-                margin-top: 565px;
-                position: fixed;
-            }
-            .ContainerPlayerDeskGame1{
-                width: 150px;
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white;
-                margin-left:10px;
-                margin-top: 645px;
-                position: fixed;
-            }
-            .ContainerPlayerDeskGame2{
-                width: 150px;
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white;
-                margin-left:200px;
-                margin-top: 645px;
-                position: fixed;
-            }
 
-
-            /*region MiddlePart*/
-            .FixedSeatContainer1{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:475px;
-                margin-top: 105px;
-                position: fixed;
-            }
-            .FixedSeatContainer2{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:725px;
-                margin-top: 105px;
-                position: fixed;
-            }
-            .FixedSeatContainer3{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:975px;
-                margin-top: 105px;
-                position: fixed;
-
-            }
-            .FixedSeatContainer4{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:475px;
-                margin-top: 285px;
-                position: fixed;
-
-            }
-            .FixedSeatContainer5{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:725px;
-                margin-top: 285px;
-                position: fixed;
-            }
-            .FixedSeatContainer6{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:975px;
-                margin-top: 285px;
-                position: fixed;
-            }
-            .FixedSeatContainer7{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:475px;
-                margin-top: 465px;
-                position: fixed;
-            }
-            .FixedSeatContainer8{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:725px;
-                margin-top: 465px;
-                position: fixed;
-            }
-            .FixedSeatContainer9{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:975px;
-                margin-top: 465px;
-                position: fixed;
-            }
-            .FixedSeatContainer10{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:475px;
-                margin-top: 645px;
-                position: fixed;
-            }
-            .FixedSeatContainer11{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:725px;
-                margin-top: 645px;
-                position: fixed;
-            }
-            .FixedSeatContainer12{
-                width: 150px; /* 容器最大宽度 */
-                height: 150px;
-                border: 1px solid #ccc;
-                background-color: white; /* 背景颜色 */
-                margin-left:975px;
-                margin-top: 645px;
-                position: fixed;
             }
 
 
             /*Right Part*/
+
             .FastMessage{
                 width: 350px; /* 容器最大宽度 */
                 height: 250px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                margin-left:1250px;
-                margin-top: 105px;
-                position: fixed;
+                margin-left:50px;
             }
             .ButtonArea{
                 width: 350px; /* 容器最大宽度 */
                 height: 500px;
-    /*            border: 1px solid #ccc;*/
                 background-color: white; /* 背景颜色 */
-                margin-left:1300px;
-                margin-top: 350px;
-                position: fixed;
+                margin-left:50px;
             }
             .MyButton{
                 width: 200px;
@@ -283,130 +71,90 @@
                 top: 50px;
                 left: 100px;
             }
+
+            /*Table Part*/
+            .bigTable{
+                margin-left: auto;
+                margin-right: auto;
+                height: 1000px;
+            }
+            .tr1{
+                border: 2px blue;
+                border-right-style: solid;
+                border-left-style: groove;
+            }
+
         </style>
     </head>
     <body>
+        <table class="bigTable">
+            <tr style="height: 5%;">
+                <td>
+                    <table>
+                        <tr>
+                            <td><div class="TextLogin"><a href="login">登录</a></div></td>
+                            <td><div class="TextRegister"><a href="login">注册</a></div></td>
+                        </tr>
+                    </table>
+                </td>
+                <td></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><div class="TextConnectUs"><a href="login">联系我们</a></div></td>
+                            <td><div class="TextHelloUser"><span>您好，【</span><span th:text="${user.getuserName()}"></span><span>】</span></div></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="tr1" style="height: 95%">
+                <td style="width: 400px;">
+                    <section id="leftPart">
+                    <table style="width: 100%;">
+                        <tr><td colspan="2"><div class="TextDeskQuickReserve"><h2>快速预约历史座位</h2></div></td></tr>
 
-        <section id="header">
+                        <tr th:each="userDesk : ${historyUserDesk}">
+                            <td colspan="2">
+                                <div class="ContainerSeat">
+                                    <h3>门店：<span th:text="${userDesk.getStoreId()}"></span></h3>
+                                    <h3>座位：<span th:text="${userDesk.getDeskId()}"></span></h3>
+                                    <h3>时间段：<span th:text="${userDesk.getStartTime()}"></span></h3>
+                                </div>
+                            </td>
+                        </tr>
 
-            <div class="TextLogin">
-                <a href="login">登录</a>
-            </div>
-            <div class="TextRegister">
-                <a href="login">注册</a>
-            </div>
-            <div class="TextConnectUs">
-                <a href="login">联系我们</a>
-            </div>
-            <div class="TextHelloUser">
-                <span>您好，【用户名】</span>
-            </div>
+                        <tr><td colspan="2"><div class="TextPlayedDeskGame"><h2>最近玩过的桌游</h2></div></td></tr>
 
-        </section>
+                        <tr>
+                            <td th:each="game : ${historyGame}">
+                                <div><img th:src="${game.getGameImage()}" style="width: 150px; height: 150px" alt=""></div>
+                            </td>
+                        </tr>
+                    </table>
+                    </section>
+                </td>
+                <td style="width: 810px;">
+                    <iframe src="/gameAll" style="position: relative; width: 810px; height:900px;">
+                    </iframe>
+                </td>
+                <td style="width: 400px;">
+                    <section id="rightPart">
+                        <div class="FastMessage">
+                            <h2><a href="login">快讯1</a></h2>
+                            <h2><a href="login">快讯2</a></h2>
+                            <h2><a href="login">快讯3</a></h2>
+                            <h2><a href="login">快讯4</a></h2>
+                        </div>
 
-        <section id="lines">
-            <div class="Separator"></div>
-            <div class="VerticalLine1"></div>
-            <div class="VerticalLine2"></div>
-        </section>
-
-        <section id="leftPart">
-            <div class="TextDeskQuickReserve">
-                <h2>快速预约历史座位</h2>
-            </div>
-            <div class="TextSeat1">
-                <h3>座位1</h3>
-            </div>
-            <div class="ContainerSeat1">
-                <h3>门店：</h3>
-                <h3>座位：</h3>
-                <h3>时间段：</h3>
-            </div>
-            <div class="TextSeat2">
-                <h3>座位2</h3>
-            </div>
-            <div class="ContainerSeat2">
-                <h3>门店：</h3>
-                <h3>座位：</h3>
-                <h3>时间段：</h3>
-            </div>
-            <div class="TextPlayedDeskGame">
-                <h2>最近玩过的桌游</h2>
-            </div>
-            <div class="ContainerPlayerDeskGame1">
-                <h2>桌游图片1</h2>
-            </div>
-            <div class="ContainerPlayerDeskGame2">
-                <h2>桌游图片2</h2>
-            </div>
-        </section>
-
-        <section id="middlePart">
-            <div class="FixedSeatContainer1">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer2">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer3">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer4">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-            <div class="FixedSeatContainer5">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-            <div class="FixedSeatContainer6">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-            <div class="FixedSeatContainer7">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer8">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer9">
-                <h2>桌游图片</h2>
-            </div>
-            <div class="FixedSeatContainer10">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-            <div class="FixedSeatContainer11">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-            <div class="FixedSeatContainer12">
-                <h3>名称：</h3>
-                <h3>类型：</h3>
-                <h3>游玩人数：</h3>
-            </div>
-        </section>
-
-        <section id="rightPart">
-            <div class="FastMessage">
-                <h2><a href="login">快讯1</a></h2>
-                <h2><a href="login">快讯2</a></h2>
-                <h2><a href="login">快讯3</a></h2>
-                <h2><a href="login">快讯4</a></h2>
-            </div>
-
-            <div class="ButtonArea">
-                <h2><button class="MyButton">立刻预约</button></h2>
-                <h2><button class="MyButton">桌游一览</button></h2>
-                <h2><button class="MyButton">活动资讯</button></h2>
-                <h2><button class="MyButton">个人信息</button></h2>
-            </div>
-        </section>
-
+                        <div class="ButtonArea">
+                            <h2><button class="MyButton">立刻预约</button></h2>
+                            <h2><button class="MyButton">桌游一览</button></h2>
+                            <h2><button class="MyButton">活动资讯</button></h2>
+                            <h2><button class="MyButton">个人信息</button></h2>
+                        </div>
+                    </section>
+                </td>
+            </tr>
+        </table>
     </body>
 </html>
