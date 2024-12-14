@@ -40,5 +40,18 @@ public class testController {
     return "html/deskOrder_SelectTime";
   }
 
+    @RequestMapping("/deskGame_All")
+  public String deskGame_All() {
+    return "html/deskGame_All";
+  }
+  @RequestMapping("/deskGame_Detail")
+  public String deskGame_Detail() {
+    return "html/deskGame_Detail";
+  }
+  @RequestMapping("/deskGame_Reserve")
+  public String deskGame_Reserve() {
+    return "html/deskGame_Reserve";
+  }
+
 
 }
