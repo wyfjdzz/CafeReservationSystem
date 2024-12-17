@@ -3,8 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .Image{
+            margin-top:30px;
+            margin-left:50px;
+        }
+        .ContainerBasicInfo{
+            width:300px;
+            height: 300px;
+            margin-top: 70px;
+            margin-left:60px;
+            text-align: left;
+            font-size: 36px;
+        }
+        .TextDescription{
+            font-size: 36px;
+            top: 0;
+            right: 200px;
+            width: 900px;
+            height: 300px;
+            position: fixed;
+            border: 1px black;
+        }
+        .TextPlayMethod{
+            font-size: 36px;
+            top: 310px;
+            right: 200px;
+            width: 900px;
+            height: 300px;
+            position: fixed;
+            border: 1px black;
+        }
+        .ButtonReserve{
+            position: fixed;
+            right: 600px;
+            top: 730px;
+        }
+
+    </style>
 </head>
 <body>
 
+<img id="image" class="Image">
+
+<div class="ContainerBasicInfo">
+    <label id="store"></label>
+    <br>
+    <br>
+    <label id="id"></label>
+    <br>
+    <br>
+    <label id="type"></label>
+    <br>
+    <br>
+    <label id="people"></label>
+    <br>
+    <br>
+    <label id="name"></label>
+</div>
+
+
+
+<div class="TextDescription">
+    <h2>游戏简介</h2>
+    <label>
+        这是游戏简介。这是游戏简介。这是游戏简介。这是游戏简介。这是游戏简介。这是游戏简介。
+    </label>
+</div>
+
+<div class="TextPlayMethod">
+    <h2>游戏玩法简述</h2>
+    <label>
+        这是玩法简述。这是玩法简述。这是玩法简述。这是玩法简述。这是玩法简述。这是玩法简述。
+    </label>
+
+</div>
+<div class="ButtonReserve">
+    <button id="reserveButton" style="font-size: 36px;" >立刻预约</button>
+</div>
+
 </body>
+<script>
+    let _store = localStorage.getItem('store');
+    let store = JSON.parse(_store);
+    localStorage.removeItem('store');
+
+    let _id = localStorage.getItem('id');
+    let id = JSON.parse(_id);
+    localStorage.removeItem('id');
+
+    let _type = localStorage.getItem('type');
+    let type= JSON.parse(_type);
+    localStorage.removeItem('type');
+
+    let _imageURL = localStorage.getItem('imageURL');
+    let imageURL = JSON.parse(_imageURL);
+    localStorage.removeItem('imageURL');
+
+    let _peopleLeast = localStorage.getItem('peopleLeast');
+    let peopleLeast = JSON.parse(_peopleLeast);
+    localStorage.removeItem('peopleLeast');
+
+    let _peopleMost = localStorage.getItem('peopleMost');
+    let peopleMost= JSON.parse(_peopleMost);
+    localStorage.removeItem('peopleMost');
+
+    let _name = localStorage.getItem('name');
+    let name = JSON.parse(_name);
+    localStorage.removeItem('name');
+
+
+
+    const image = document.getElementById("image");
+    image.src = imageURL
+    image.width = 300;
+    image.height = 300;
+
+    document.getElementById("name").textContent = "桌游名称："+name;
+    document.getElementById("people").textContent = "游玩人数："+peopleLeast+"-"+peopleMost;
+    document.getElementById("type").textContent = "桌游类型："+type;
+    document.getElementById("id").textContent = "桌游编号："+id;
+    document.getElementById("store").textContent = "所在店铺："+store;
+
+
+
+    const newButton = document.getElementById('reserveButton');
+    newButton.onclick=function (){
+
+        window.location.href = 'deskGame_Reserve';
+
+        localStorage.setItem('name', JSON.stringify(name));
+        localStorage.setItem('store', JSON.stringify(store));
+
+    };
+
+
+</script>
 </html>
