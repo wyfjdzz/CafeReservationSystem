@@ -3,49 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
-        let _store = localStorage.getItem('store');
-        let store = JSON.parse(_store);
-        localStorage.removeItem('store');
+    <style>
+        .ContainerOrderInfo{
+            width: 300px;
+            height: 600px;
+            font-size: 36px;
+            text-align: left;
+            margin-top: 300px;
+            margin-left: 100px;
+        }
+        .ContainerTimeSelect1{
+            position: fixed;
+            width: 300px;
+            top: 250px;
+            left: 600px;
+            font-size: 36px;
+        }
 
-        let _id = localStorage.getItem('id');
-        let id = JSON.parse(_id);
-        localStorage.removeItem('id');
+        .ContainerTimeSelect2{
+            position: fixed;
+            width: 300px;
+            top: 250px;
+            left: 920px;
+            font-size: 36px;
+        }
+    </style>
 
-        let _type = localStorage.getItem('type');
-        let type= JSON.parse(_type);
-        localStorage.removeItem('type');
-
-        let _price= localStorage.getItem('price');
-        let price = JSON.parse(_price);
-        localStorage.removeItem('price');
-
-        console.log(store);
-        console.log(id);
-        console.log(type);
-        console.log(price);
-
-        document.addEventListener('DOMContentLoaded', function()
-        {
-            let textStore = document.getElementById('textStore');
-            textStore.textContent = "store: " + store;
-
-            let textId = document.getElementById('textId');
-            textId.textContent = "id: " + id;
-
-            let textType = document.getElementById('textType');
-            textType.textContent = "type: " + type;
-
-            let textPrice = document.getElementById('textPrice');
-            textPrice.textContent = "price: " + price;
-        });
-
-    </script>
 </head>
 <body>
+<h1 style="top: 30px;left: 650px; position: fixed">请选择时间段</h1>
+<div class="ContainerOrderInfo">
     <label id="textId"></label>
+    <br>
     <label id="textStore"></label>
+    <br>
     <label id="textType"></label>
-    <label id="textPrice"></label>
+    <br>
+    <p>当前价格: <span id="price">0</span> 元</p>
+</div>
+
+
+<form action="/deskOrder_OrderSuccess" method="post">
+    <div class="ContainerTimeSelect1">
+        <input type="checkbox" id="option1" class="price-checkbox" value="8">
+        <label for="option1"></label>08:00-09:00<br>
+        <input type="checkbox" id="option2" class="price-checkbox" value="9">
+        <label for="option2"></label>09:00-10:00<br>
+        <input type="checkbox" id="option3" class="price-checkbox" value="10">
+        <label for="option3"></label>10:00-11:00<br>
+        <input type="checkbox" id="option4" class="price-checkbox" value="11">
+        <label for="option4"></label>11:00-12:00<br>
+        <input type="checkbox" id="option5" class="price-checkbox" value="12">
+        <label for="option5"></label>12:00-13:00<br>
+        <input type="checkbox" id="option6" class="price-checkbox" value="13">
+        <label for="option6"></label>13:00-14:00<br>
+        <input type="checkbox" id="option7" class="price-checkbox" value="14">
+        <label for="option7"></label>14:00-15:00<br>
+    </div>
+
+    <div class="ContainerTimeSelect2">
+        <input type="checkbox" id="option8" class="price-checkbox" value="15">
+        <label for="option8"></label>15:00-16:00<br>
+        <input type="checkbox" id="option9" class="price-checkbox" value="16">
+        <label for="option9"></label>16:00-17:00<br>
+        <input type="checkbox" id="option10" class="price-checkbox" value="17">
+        <label for="option10"></label>17:00-18:00<br>
+        <input type="checkbox" id="option11" class="price-checkbox" value="18">
+        <label for="option11"></label>18:00-19:00<br>
+        <input type="checkbox" id="option12" class="price-checkbox" value="19">
+        <label for="option12"></label>19:00-20:00<br>
+        <input type="checkbox" id="option13" class="price-checkbox" value="20">
+        <label for="option13"></label>20:00-21:00<br>
+        <input type="checkbox" id="option14" class="price-checkbox" value="21">
+        <label for="option14"></label>21:00-22:00<br>
+    </div>
+
+    <button id="submit" type="submit" value="提交" disabled style="position: fixed; top: 650px; left: 700px; font-size: 36px">提交</button>
+</form>
+
 </body>
+
+<script>
+    let _store = localStorage.getItem('store');
+    let store = JSON.parse(_store);
+    localStorage.removeItem('store');
+
+    let _id = localStorage.getItem('id');
+    let id = JSON.parse(_id);
+    localStorage.removeItem('id');
+
+    let _type = localStorage.getItem('type');
+    let type= JSON.parse(_type);
+    localStorage.removeItem('type');
+
+    let _price= localStorage.getItem('price');
+    let price = JSON.parse(_price);
+    localStorage.removeItem('price');
+
+    var currentPrice = 0;
+
+    document.addEventListener('DOMContentLoaded', function()
+    {
+        let textStore = document.getElementById('textStore');
+        textStore.textContent = "门店： " + store;
+
+        let textId = document.getElementById('textId');
+        textId.textContent = "桌子编号: " + id;
+
+        let textType = document.getElementById('textType');
+        textType.textContent = "类型: " + type;
+
+    });
+
+    function updatePrice() {
+
+
+        var checkboxes = document.querySelectorAll('.price-checkbox');
+
+        var numberOfChecked = Array.from(checkboxes).filter(function(checkbox) {
+            return checkbox.checked;
+        }).length;
+
+        currentPrice = numberOfChecked * price;
+
+        document.getElementById('price').textContent = currentPrice;
+
+        const submitButton = document.getElementById("submit")
+        submitButton.disabled = currentPrice === 0;
+        submitButton.onclick = function (){
+            window.location.href = "deskOrder_OrderSuccess.html";
+        }
+
+    }
+
+    // 为每个复选框添加事件监听器
+    document.querySelectorAll('.price-checkbox').forEach(function(checkbox) {
+        checkbox.addEventListener('change', updatePrice);
+    });
+
+</script>
 </html>
