@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerInputPart{
+            top: 50px;
+            width: 50%;
+            margin-left: 25%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class = "ContainerInputPart">
+
+    <form action="/Manager_GameManage_Success" method="post">
+        <label for="username">桌游名称：</label>
+        <input type="text" id="username" style="width: 400px;height: 24px;" required>
+        <br>
+        <br>
+
+        <label for="imageURL">桌游照片URL：</label>
+        <input type="text" id="imageURL" style="width: 400px;height: 24px;" required>
+        <br>
+        <br>
+
+        <label for="storeSelector">选择门店:</label>
+        <select name="storeSelector" id="storeSelector" style="width: 50px;height: 25px;">
+            <option value="null">无</option>
+        </select>
+        <br>
+        <br>
+
+        <label for="typeSelector1">选择类型1:</label>
+        <select name="typeSelector1" id="typeSelector1" style="width: 50px;height: 25px;">
+            <option value="null">无</option>
+        </select>
+
+        <label for="typeSelector2">选择类型2:</label>
+        <select name="typeSelector2" id="typeSelector2" style="width: 50px;height: 25px;">
+            <option value="null">无</option>
+        </select>
+
+        <label for="typeSelector3">选择类型3:</label>
+        <select name="typeSelector3" id="typeSelector3" style="width: 50px;height: 25px;">
+            <option value="null">无</option>
+        </select>
+        <br>
+        <br>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="description">游戏简介（100字以内）：</label>
+            <textarea id="description" cols="25" rows="4" style="height: 100px;width: 300px" required></textarea>
+        </div>
+        <br>
+        <br>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="playMethod">玩法简述（100字以内）：</label>
+            <textarea id="playMethod" cols="25" rows="4" style="height: 100px;width: 300px" required></textarea>
+        </div>
+        <br>
+        <br>
+
+
+        <input type="submit" value="提交" style="font-size: 24px">
+    </form>
+
+</div>
+
+<script>
+    //门店选项列表(可变）
+    let storeOptions = ["1","2","3","4"];
+    //桌游类型选项列表(可变）
+    let typeOptions = ["A","B","C"];
+
+    let selectorStore = document.getElementById("storeSelector");
+    let selectorType1 = document.getElementById("typeSelector1");
+    let selectorType2 = document.getElementById("typeSelector2");
+    let selectorType3 = document.getElementById("typeSelector3");
+
+    storeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorStore.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType1.appendChild(newOption);
+        selectorType2.appendChild(newOption);
+        selectorType3.appendChild(newOption);
+    });
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerSelection{
+            height: 40px;
+            border: 1px solid #ccc;
+            background-color: white;
+            margin-left: 0;
+        }
+        .Store{
+            font-size: 24px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        .People{
+            font-size: 24px;
+            margin-left: 100px;
+            display: inline-block;
+        }
+        .Type1{
+            font-size: 24px;
+            margin-left: 100px;
+            display: inline-block;
+        }
+        .Type2{
+            font-size: 24px;
+            margin-left: 100px;
+            display: inline-block;
+        }
+        .Type3{
+            font-size: 24px;
+            margin-left: 100px;
+            display: inline-block;
+        }
+
+        .ContainerExcel{
+            margin-top: 50px;
+            margin-left: 0;
+            width:100%;
+            border: 1px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ContainerExcel1{
+            margin-top: 50px;
+            margin-left: 50px;
+            width: 600px;
+            border: 1px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ContainerExcel2{
+            margin-top: 50px;
+            margin-right: 50px;
+            width: 600px;
+            border: 1px black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(140 140 140);
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        caption {
+            caption-side: bottom;
+            padding: 10px;
+            font-weight: bold;
+        }
+        thead,
+        tfoot {
+            background-color: rgb(228 240 245);
+        }
+        th,
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 8px 10px;
+        }
+        td:last-of-type {
+            text-align: center;
+        }
+        tbody > tr:nth-of-type(even) {
+            background-color: rgb(237 238 242);
+        }
+        tfoot th {
+            text-align: right;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+        .ContainerButtonPart{
+            width: 50%;
+            height: 40px;
+            margin-left: 45%;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="ContainerSelection">
+
+    <div class="Store">
+        <label for="store">选择门店:</label>
+        <select id="store">
+            <option value= null>无</option>
+            <option value="1">星光桌游店</option>
+        </select>
+    </div>
+
+    <div class="People">
+        <label for="people">选择人数:</label>
+        <select id="people">
+            <option value= null>无</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+    </div>
+
+    <div class="Type1">
+        <label for="type1">选择类型1:</label>
+        <select id="type1">
+            <option value= null>无</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+    </div>
+
+    <div class="Type2">
+        <label for="type2">选择类型2:</label>
+        <select id="type2">
+            <option value= null>无</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+    </div>
+
+    <div class="Type3">
+        <label for="type3">选择类型3:</label>
+        <select id="type3">
+            <option value= null>无</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="ContainerExcel">
+
+    <div class="ContainerExcel1">
+        <table id="dataTable1">
+            <thead>
+            <tr>
+                <th scope="col">名称</th>
+                <th scope="col">图片</th>
+                <th scope="col">店铺</th>
+                <th scope="col">最少人数</th>
+                <th scope="col">最多人数</th>
+                <th scope="col">类型</th>
+                <th scope="col">查看详情</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ContainerExcel2">
+        <table id="dataTable2">
+            <thead>
+            <tr>
+                <th scope="col">名称</th>
+                <th scope="col">图片</th>
+                <th scope="col">店铺</th>
+                <th scope="col">最少人数</th>
+                <th scope="col">最多人数</th>
+                <th scope="col">类型</th>
+                <th scope="col">查看详情</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="ContainerButtonPart">
+    <button id="pre">上一页</button>
+    <label id="pageNumber"></label>
+    <button id="next">下一页</button>
+</div>
+</body>
+<script>
+    const games = [
+        { id: "1", store: "2", name: "5", imageURL: "noa.png", recommendPeopleLeast: "5", recommendPeopleMost: "10", type: ["B", "C"] },
+        { id: "2", store: "1", name: "10", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "7", type: ["A", "C"] },
+        { id: "3", store: "2", name: "6", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["A", "B", "C"] },
+        { id: "4", store: "1", name: "7", imageURL: "noa.png", recommendPeopleLeast: "4", recommendPeopleMost: "10", type: ["B"] },
+        { id: "5", store: "2", name: "1", imageURL: "noa.png", recommendPeopleLeast: "1", recommendPeopleMost: "6", type: ["C"] },
+        { id: "6", store: "1", name: "3", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "8", type: ["A", "B"] },
+        { id: "7", store: "2", name: "4", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["C"] },
+        { id: "8", store: "1", name: "8", imageURL: "noa.png", recommendPeopleLeast: "5", recommendPeopleMost: "12", type: ["A", "C"] },
+        { id: "9", store: "2", name: "2", imageURL: "noa.png", recommendPeopleLeast: "4", recommendPeopleMost: "10", type: ["B"] },
+        { id: "10", store: "1", name: "9", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "7", type: ["A", "B", "C"] },
+        { id: "11", store: "2", name: "1", imageURL: "noa.png", recommendPeopleLeast: "1", recommendPeopleMost: "6", type: ["C"] },
+        { id: "12", store: "1", name: "5", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["A"] },
+        { id: "13", store: "2", name: "7", imageURL: "noa.png", recommendPeopleLeast: "4", recommendPeopleMost: "10", type: ["B", "C"] },
+        { id: "14", store: "1", name: "3", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "8", type: ["A", "C"] },
+        { id: "15", store: "2", name: "8", imageURL: "noa.png", recommendPeopleLeast: "5", recommendPeopleMost: "12", type: ["B"] },
+        { id: "16", store: "1", name: "4", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["A", "B", "C"] },
+        { id: "17", store: "2", name: "10", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "7", type: ["C"] },
+        { id: "18", store: "1", name: "6", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["A"] },
+        { id: "19", store: "2", name: "2", imageURL: "noa.png", recommendPeopleLeast: "4", recommendPeopleMost: "10", type: ["B", "C"] },
+        { id: "20", store: "1", name: "9", imageURL: "noa.png", recommendPeopleLeast: "2", recommendPeopleMost: "7", type: ["B"] },
+        { id: "21", store: "2", name: "5", imageURL: "noa.png", recommendPeopleLeast: "1", recommendPeopleMost: "6", type: ["A", "C"] },
+        { id: "22", store: "1", name: "1", imageURL: "noa.png", recommendPeopleLeast: "1", recommendPeopleMost: "6", type: ["A", "B", "C"] },
+        { id: "23", store: "2", name: "3", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["C"] },
+        { id: "24", store: "1", name: "7", imageURL: "noa.png", recommendPeopleLeast: "4", recommendPeopleMost: "10", type: ["A", "B"] },
+        { id: "25", store: "2", name: "4", imageURL: "noa.png", recommendPeopleLeast: "3", recommendPeopleMost: "9", type: ["A", "C"] }
+    ];
+
+    const gamesPerPage = 10; // 每页显示10个桌游
+    let currentPage=1;
+
+    const currentPageText = document.getElementById("pageNumber");
+    currentPageText.textContent = currentPage;
+
+    function refreshPage(){
+
+        currentPageText.textContent = currentPage.toString();
+        const buttonPre = document.getElementById("pre");
+        const buttonNext = document.getElementById("next");
+
+        buttonPre.disabled = currentPage === 1;
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        tbody1.innerHTML = '';
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        tbody2.innerHTML = '';
+
+        const store = document.getElementById("store").value;
+        const people = document.getElementById("people").value;
+        const type1 = document.getElementById("type1").value;
+        const type2 = document.getElementById("type2").value;
+        const type3 = document.getElementById("type3").value;
+
+        const filteredGames = games.filter(item => {
+            const filter1Check = parseInt(item.recommendPeopleLeast) <= parseInt(people) && parseInt(item.recommendPeopleMost) >= parseInt(people) || people === "null" ;
+            const filter2Check = item.store === store || store === "null" ;
+            const filter3Check = item.type.some(type => type === type1) || type1 === "null" ;
+            const filter4Check = item.type.some(type => type === type2) || type2 === "null" ;
+            const filter5Check = item.type.some(type => type === type3) || type3 === "null" ;
+            return filter1Check && filter2Check && filter3Check && filter4Check && filter5Check;
+
+        });
+        console.log(filteredGames.length);
+        buttonNext.disabled = currentPage === Math.ceil(filteredGames.length/gamesPerPage);
+        displayGames(currentPage, filteredGames)
+    }
+
+    function displayGames(page, filteredGames) {
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        const startIndex = (page-1)  * gamesPerPage;
+        const middleIndex = startIndex + 5;
+        const endIndex = page * gamesPerPage;
+
+        for (let i = startIndex; i < middleIndex && i < filteredGames.length; i++) {
+            const row = tbody1.insertRow();
+            const item = filteredGames[i];
+            const image = document.createElement("img");
+            image.src = item.imageURL;
+            image.width = 100;
+            image.height = 100;
+
+            row.insertCell(0).textContent = item.name
+            let newCell1 = row.insertCell(1)
+            newCell1.appendChild(image);
+            row.insertCell(2).textContent = item.store;
+            row.insertCell(3).textContent = item.recommendPeopleLeast;
+            row.insertCell(4).textContent = item.recommendPeopleMost;
+            row.insertCell(5).textContent = item.type;
+            let newCell6 = row.insertCell(6);
+            let newButton = document.createElement('button');
+            newButton.type = 'button';
+            newButton.textContent = '查看详情';
+
+            newButton.onclick = function() {
+                const store = item.store;
+                const type = item.type;
+                const id = item.id;
+                const name = item.name;
+                const imageURL = item.imageURL;
+                const peopleLeast = item.recommendPeopleLeast;
+                const peopleMost = item.recommendPeopleMost;
+
+                localStorage.setItem('imageURL', JSON.stringify(imageURL));
+                localStorage.setItem('store', JSON.stringify(store));
+                localStorage.setItem('type', JSON.stringify(type));
+                localStorage.setItem('id', JSON.stringify(id));
+                localStorage.setItem('name', JSON.stringify(name));
+                localStorage.setItem('peopleLeast',JSON.stringify(peopleLeast))
+                localStorage.setItem('peopleMost',JSON.stringify(peopleMost))
+
+                window.location.href = 'deskGame_Detail';
+            };
+            newCell6.appendChild(newButton);
+        }
+
+        for (let i = middleIndex; i < endIndex && i < filteredGames.length; i++) {
+            const row = tbody2.insertRow();
+            const item = filteredGames[i];
+            const image = document.createElement("img");
+            image.src = item.imageURL;
+            image.width = 100;
+            image.height = 100;
+
+            row.insertCell(0).textContent = item.name
+            let newCell1 = row.insertCell(1)
+            newCell1.appendChild(image);
+            row.insertCell(2).textContent = item.store;
+            row.insertCell(3).textContent = item.recommendPeopleLeast;
+            row.insertCell(4).textContent = item.recommendPeopleMost;
+            row.insertCell(5).textContent = item.type;
+            let newCell6 = row.insertCell(6);
+            let newButton = document.createElement('button');
+            newButton.type = 'button';
+            newButton.textContent = '查看详情';
+
+
+
+
+            newButton.onclick = function() {
+                const store = item.store;
+                const type = item.type;
+                const id = item.id;
+                const name = item.name;
+
+                localStorage.setItem('image', JSON.stringify(image));
+                localStorage.setItem('store', JSON.stringify(store));
+                localStorage.setItem('type', JSON.stringify(type));
+                localStorage.setItem('id', JSON.stringify(id));
+                localStorage.setItem('name', JSON.stringify(name));
+                localStorage.setItem('peopleLeast',JSON.stringify(peopleLeast))
+                localStorage.setItem('peopleMost',JSON.stringify(peopleMost))
+
+                window.location.href = 'deskGame_Detail';
+            };
+            newCell6.appendChild(newButton);
+        }
+
+
+
+
+
+
+    }
+
+    function prePage(){
+        currentPage--;
+
+        refreshPage();
+    }
+    function nextPage(){
+        currentPage++;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+    function initializePageNumber(){
+        currentPage=1;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+
+    document.getElementById('store').addEventListener('change', initializePageNumber);
+    document.getElementById('people').addEventListener('change', initializePageNumber);
+    document.getElementById('type1').addEventListener('change', initializePageNumber);
+    document.getElementById('type2').addEventListener('change', initializePageNumber);
+    document.getElementById('type3').addEventListener('change', initializePageNumber);
+    document.getElementById('pre').addEventListener('click', prePage);
+    document.getElementById('next').addEventListener('click', nextPage);
+
+
+    // 初始化页面
+    window.onload = initializePageNumber;
+
+
+
+</script>
+</html>

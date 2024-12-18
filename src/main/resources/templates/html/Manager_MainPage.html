@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerButtonPart{
+            position: fixed;
+            top: 400px;
+            left:18%;
+            width: 75%;
+        }
+    </style>
+</head>
+<body>
+<label style="font-size: 48px; position: fixed;top: 150px;left: 620px">请选择管理内容</label>
+<div class="ContainerButtonPart">
+    <button id="Order" style="width: 300px;height: 200px;font-size: 36px;margin-right: 50px">预约记录管理</button>
+    <button id="Game" style="width: 300px;height: 200px;font-size: 36px;">桌游信息管理</button>
+    <button id="User" style="width: 300px;height: 200px;font-size: 36px;margin-left: 50px">用户信息管理</button>
+</div>
+
+</body>
+<script>
+    let buttonOrder = document.getElementById("Order");
+    let buttonGame = document.getElementById("Game");
+    let buttonUser = document.getElementById("User");
+    buttonOrder.onclick = function (){
+        window.location.href = "Manager_OrderAll";
+    }
+    buttonGame.onclick = function (){
+        window.location.href = "Manager_GameManage_SelectManageType";
+    }
+    buttonUser.onclick = function (){
+        window.location.href = "Manager_UserAll";
+    }
+
+</script>
+</html>
