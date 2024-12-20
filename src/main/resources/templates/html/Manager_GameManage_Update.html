@@ -182,7 +182,7 @@
                 <th scope="col">最少人数</th>
                 <th scope="col">最多人数</th>
                 <th scope="col">类型</th>
-                <th scope="col">查看详情</th>
+                <th scope="col">修改信息</th>
             </tr>
             </thead>
             <tbody>
@@ -201,7 +201,7 @@
                 <th scope="col">最少人数</th>
                 <th scope="col">最多人数</th>
                 <th scope="col">类型</th>
-                <th scope="col">查看详情</th>
+                <th scope="col">修改信息</th>
             </tr>
             </thead>
             <tbody>
@@ -307,31 +307,26 @@
             row.insertCell(3).textContent = item.recommendPeopleLeast;
             row.insertCell(4).textContent = item.recommendPeopleMost;
             row.insertCell(5).textContent = item.type;
+
             let newCell6 = row.insertCell(6);
+
+            let newForm = document.createElement("form");
+            newForm.method = "POST";
+            newForm.action = "/Manager_GameManage_UpdateInfo";
+
+            let newInput = document.createElement("input");
+            newInput.type="text";
+            newInput.style.display="none";
+            newInput.name = "gameId";
+            newInput.value=item.id;
+            newForm.appendChild(newInput);
+
             let newButton = document.createElement('button');
-            newButton.type = 'button';
-            newButton.textContent = '查看详情';
+            newButton.type = "submit";
+            newButton.textContent = "下架桌游";
+            newForm.appendChild(newButton);
 
-            newButton.onclick = function() {
-                const store = item.store;
-                const type = item.type;
-                const id = item.id;
-                const name = item.name;
-                const imageURL = item.imageURL;
-                const peopleLeast = item.recommendPeopleLeast;
-                const peopleMost = item.recommendPeopleMost;
-
-                localStorage.setItem('imageURL', JSON.stringify(imageURL));
-                localStorage.setItem('store', JSON.stringify(store));
-                localStorage.setItem('type', JSON.stringify(type));
-                localStorage.setItem('id', JSON.stringify(id));
-                localStorage.setItem('name', JSON.stringify(name));
-                localStorage.setItem('peopleLeast',JSON.stringify(peopleLeast))
-                localStorage.setItem('peopleMost',JSON.stringify(peopleMost))
-
-                window.location.href = 'deskGame_Detail';
-            };
-            newCell6.appendChild(newButton);
+            newCell6.appendChild(newForm);
         }
 
         for (let i = middleIndex; i < endIndex && i < filteredGames.length; i++) {
@@ -350,27 +345,24 @@
             row.insertCell(4).textContent = item.recommendPeopleMost;
             row.insertCell(5).textContent = item.type;
             let newCell6 = row.insertCell(6);
+
+            let newForm = document.createElement("form");
+            newForm.method = "POST";
+            newForm.action = "/Manager_GameManage_UpdateInfo";
+
+            let newInput = document.createElement("input");
+            newInput.type="text";
+            newInput.style.display="none";
+            newInput.name = "gameId";
+            newInput.value=item.id;
+            newForm.appendChild(newInput);
+
             let newButton = document.createElement('button');
-            newButton.type = 'button';
-            newButton.textContent = '查看详情';
+            newButton.type = "submit";
+            newButton.textContent = "下架桌游";
+            newForm.appendChild(newButton);
 
-            newButton.onclick = function() {
-                const store = item.store;
-                const type = item.type;
-                const id = item.id;
-                const name = item.name;
-
-                localStorage.setItem('image', JSON.stringify(image));
-                localStorage.setItem('store', JSON.stringify(store));
-                localStorage.setItem('type', JSON.stringify(type));
-                localStorage.setItem('id', JSON.stringify(id));
-                localStorage.setItem('name', JSON.stringify(name));
-                localStorage.setItem('peopleLeast',JSON.stringify(peopleLeast))
-                localStorage.setItem('peopleMost',JSON.stringify(peopleMost))
-
-                window.location.href = 'deskGame_Detail';
-            };
-            newCell6.appendChild(newButton);
+            newCell6.appendChild(newForm);
         }
     }
 
