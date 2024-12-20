@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerInputPart{
+            top: 50px;
+            width: 50%;
+            margin-left: 25%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class = "ContainerInputPart">
+
+    <form action="/Manager_DeskManage_UpdateSuccess" method="post">
+
+        <label for="storeSelector">选择门店:</label>
+        <select name="storeSelector" id="storeSelector" style="width: 50px;height: 25px;font-size: 20px;">
+        </select>
+        <br>
+        <br>
+
+        <label for="typeSelector">桌子类型:</label>
+        <select name="typeSelector" id="typeSelector" style="width: 50px;height: 25px;font-size: 20px;">
+        </select>
+        <br>
+        <br>
+
+        <input type="submit" value="提交" style="font-size: 24px">
+    </form>
+
+</div>
+
+<script>
+    //门店选项列表(可变）
+    let storeOptions = ["1","2","3","4"];
+    //桌游类型选项列表(可变）
+    let typeOptions = ["1-2","3-8","9-12"];
+
+    let selectorStore = document.getElementById("storeSelector");
+    let selectorType = document.getElementById("typeSelector");
+
+    storeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorStore.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType.appendChild(newOption);
+    });
+</script>
+
+
+</body>
+</html>
