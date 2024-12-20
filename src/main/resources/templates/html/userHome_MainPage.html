@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerButtonPart{
+            position: fixed;
+            top: 400px;
+            left: 25%;
+            width: 75%;
+        }
+    </style>
+</head>
+<body>
+<label style="font-size: 48px; position: fixed;top: 150px;left: 600px">请选择查看内容</label>
+<div class="ContainerButtonPart">
+    <button id="Game" style="width: 300px;height: 200px;font-size: 24px;margin-right: 150px">桌游预约记录查看</button>
+    <button id="Desk" style="width: 300px;height: 200px;font-size: 24px;">桌子预约记录查看</button>
+</div>
+<a href="mainPage">返回</a>
+
+</body>
+<script>
+    let buttonGame = document.getElementById("Game");
+    let buttonDesk = document.getElementById("Desk");
+    buttonDesk.onclick = function (){
+        window.location.href = "userHome_DeskReserveRecord";
+    }
+    buttonGame.onclick = function (){
+        window.location.href = "userHome_GameReserveRecord";
+    }
+
+</script>
+</html>
