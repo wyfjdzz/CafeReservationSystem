@@ -15,36 +15,39 @@
 <body>
 <div class = "ContainerInputPart">
 
-    <form action="/Manager_GameManage_Success" method="post">
+    <form action="/Manager_GameManage_UploadSuccess" method="post">
         <label for="username">桌游名称：</label>
-        <input type="text" id="username" style="width: 400px;height: 24px;" required>
-        <br>
-        <br>
-
-        <label for="imageURL">桌游照片URL：</label>
-        <input type="text" id="imageURL" style="width: 400px;height: 24px;" required>
+        <input type="text" id="username" style="width: 400px;height: 24px;font-size: 20px;" required>
         <br>
         <br>
 
         <label for="storeSelector">选择门店:</label>
-        <select name="storeSelector" id="storeSelector" style="width: 50px;height: 25px;">
+        <select name="storeSelector" id="storeSelector" style="width: 50px;height: 25px;font-size: 20px;">
             <option value="null">无</option>
         </select>
+        <br>
+        <br>
+
+        <label for="peopleLeast">人数：</label>
+        <input type="text" id="peopleLeast" style="width: 50px;height: 25px;font-size: 20px;" required>
+
+        <label for="peopleMost"> -- </label>
+        <input type="text" id="peopleMost" style="width: 50px;height: 25px;font-size: 20px;" required>
         <br>
         <br>
 
         <label for="typeSelector1">选择类型1:</label>
-        <select name="typeSelector1" id="typeSelector1" style="width: 50px;height: 25px;">
+        <select name="typeSelector1" id="typeSelector1" style="width: 50px;height: 25px;font-size: 20px;">
             <option value="null">无</option>
         </select>
 
         <label for="typeSelector2">选择类型2:</label>
-        <select name="typeSelector2" id="typeSelector2" style="width: 50px;height: 25px;">
+        <select name="typeSelector2" id="typeSelector2" style="width: 50px;height: 25px;font-size: 20px;">
             <option value="null">无</option>
         </select>
 
         <label for="typeSelector3">选择类型3:</label>
-        <select name="typeSelector3" id="typeSelector3" style="width: 50px;height: 25px;">
+        <select name="typeSelector3" id="typeSelector3" style="width: 50px;height: 25px;font-size: 20px;">
             <option value="null">无</option>
         </select>
         <br>
@@ -52,14 +55,14 @@
 
         <div style="display: flex; flex-direction: column; align-items: flex-start;">
             <label for="description">游戏简介（100字以内）：</label>
-            <textarea id="description" cols="25" rows="4" style="height: 100px;width: 300px" required></textarea>
+            <textarea id="description" cols="25" rows="4" style="height: 100px;width: 300px;font-size: 20px;" required></textarea>
         </div>
         <br>
         <br>
 
         <div style="display: flex; flex-direction: column; align-items: flex-start;">
             <label for="playMethod">玩法简述（100字以内）：</label>
-            <textarea id="playMethod" cols="25" rows="4" style="height: 100px;width: 300px" required></textarea>
+            <textarea id="playMethod" cols="25" rows="4" style="height: 100px;width: 300px;font-size: 20px;" required></textarea>
         </div>
         <br>
         <br>
@@ -93,11 +96,21 @@
         newOption.value = option;
         newOption.textContent = option;
         selectorType1.appendChild(newOption);
-        selectorType2.appendChild(newOption);
-        selectorType3.appendChild(newOption);
     });
 
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType2.appendChild(newOption);
+    });
 
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType3.appendChild(newOption);
+    });
 </script>
 
 
