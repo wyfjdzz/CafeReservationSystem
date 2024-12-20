@@ -43,8 +43,8 @@
     <label id="userName">用户：无远弗界的斩罪</label>
 </div>
 <div class="ContainerButton">
-    <button style="font-size: 36px; margin-right: 30px" >确认</button>
-    <button style="font-size: 36px;">取消</button>
+    <button id="confirm" style="font-size: 36px; margin-right: 30px" >确认</button>
+    <button id="cancel" style="font-size: 36px;">取消</button>
 </div>
 
 </body>
@@ -57,6 +57,14 @@
     let _store = localStorage.getItem('store');
     let store = JSON.parse(_store);
     localStorage.removeItem('store');
+
+    document.getElementById("confirm").onclick = function (){
+        window.location.href = "deskGame_OrderSuccess"
+    }
+
+    document.getElementById("cancel").onclick = function (){
+        window.location.href = "deskGame_All"
+    }
 
     document.getElementById("deskGameName").textContent="桌游名称："+deskGameName;
     document.getElementById("store").textContent="所在店铺："+store;
