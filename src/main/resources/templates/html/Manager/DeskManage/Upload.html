@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerInputPart{
+            top: 50px;
+            width: 50%;
+            margin-left: 25%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class = "ContainerInputPart">
+    <form>
+        <label for="storeSelector">选择门店:</label>
+        <select name="storeSelector" id="storeSelector" style="width: 50px;height: 25px;font-size: 20px;">
+        </select>
+        <br>
+        <br>
+        <label for="typeSelector">桌子类型:</label>
+        <select name="typeSelector" id="typeSelector" style="width: 50px;height: 25px;font-size: 20px;">
+        </select>
+        <br>
+        <br>
+    </form>
+    <input type="submit" id="submit" value="提交" style="font-size: 24px">
+</div>
+
+<script th:inline="javascript">
+    //门店选项列表(可变）
+    const storeOptions = /*[[${allStoreNames}]]*/ [];
+    //桌游类型选项列表(可变）
+    let typeOptions = ["2","3","4","5","6","7","8","9","10","11","12"];
+
+    let selectorStore = document.getElementById("storeSelector");
+    let selectorType = document.getElementById("typeSelector");
+
+    storeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorStore.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType.appendChild(newOption);
+    });
+
+    const submitButton = document.getElementById("submit");
+    submitButton.onclick = function (){
+        const params = new URLSearchParams({
+            storeName: document.getElementById("storeSelector").value,
+            deskCapacity: document.getElementById("typeSelector").value
+        });
+        console.log(params.toString());
+        fetch("/UploadDeskSuccess?" + params.toString(), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        window.location.href = "Manager_DeskManage_UploadSuccess";
+    }
+</script>
+
+
+</body>
+</html>

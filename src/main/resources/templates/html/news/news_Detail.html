@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .article-header {
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 10px;
+        }
+        .article-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .article-meta {
+            color: #666;
+            font-size: 14px;
+        }
+        .article-meta span {
+            margin-right: 15px;
+        }
+        .article-content {
+            margin-top: 20px;
+        }
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+        .return-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .return-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header class="article-header">
+        <h1 class="article-title" id="title"></h1>
+        <div class="article-meta">
+            <span id="author"></span>
+            <span id="date"></span>
+        </div>
+    </header>
+
+    <article class="article-content">
+        <p>正文内容开始...</p>
+
+        <p id="Description">$\sin(A \pm B) = \sin(A)\cos(B) \pm \cos(A)\sin(B)$ 是三角学中的一个重要公式，它描述了正弦函数的和角公式。</p>
+
+        <p id="Detail">文章内容继续，这里可以包含更多的段落、图片和其他元素。</p>
+
+
+        <p>最后，这里是文章的结束部分。</p>
+    </article>
+    <a href="javascript:history.back()" class="return-button">返回</a>
+</div>
+
+</body>
+<script>
+    let _id = localStorage.getItem('newsID');
+    console.log(_id);
+    // let id = JSON.parse(_id);
+    localStorage.removeItem('id');
+
+    let _author = localStorage.getItem('author');
+    // let author = JSON.parse(_author);
+    localStorage.removeItem('author');
+
+    let _title = localStorage.getItem('title');
+    // let title = JSON.parse(_title);
+    localStorage.removeItem('title');
+
+    let _date = localStorage.getItem('dataTime');
+    // let date = JSON.parse(_date);
+    localStorage.removeItem('dataTime');
+
+    console.log(_author);
+    console.log(_date);
+    console.log(_title);
+
+    document.getElementById("author").textContent=_author;
+    document.getElementById("date").textContent=_date;
+    document.getElementById("title").textContent=_title;
+
+    fetch("/NewDetail", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "newId": _id
+        })
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById("Description").textContent = data.newDescription;
+            document.getElementById("Detail").textContent = data.newDetail;
+        })
+        .catch(error => console.error("Error:", error));
+</script>
+</html>

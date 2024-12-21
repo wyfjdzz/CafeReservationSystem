@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .TextConfirm{
+            margin-top: 100px;
+            margin-left: 25%;
+            width:50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+        .ContainerReserveText{
+            margin-top: 125px;
+            margin-left: 40%;
+            width:50%;
+            height: 300px;
+            font-size: 36px;
+        }
+        .ContainerButton{
+            margin-top: 50px;
+            margin-left: 25%;
+            width:50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+<div class="TextConfirm">
+    <label>请确认您的订单</label>
+</div>
+<div class="ContainerReserveText">
+    <label id="deskGameName"></label>
+    <br>
+    <label id="store"></label>
+    <br>
+    <label id="userName">用户：<span th:text="${userName}"></span></label>
+</div>
+<div class="ContainerButton">
+    <button id="confirm" style="font-size: 36px; margin-right: 30px" >确认</button>
+    <button id="cancel" style="font-size: 36px;">取消</button>
+</div>
+
+</body>
+
+<script>
+    let _deskGameName = localStorage.getItem('name');
+    let deskGameName = JSON.parse(_deskGameName);
+    localStorage.removeItem('name');
+
+    let _store = localStorage.getItem('store');
+    let store = JSON.parse(_store);
+    localStorage.removeItem('store');
+
+    document.getElementById("deskGameName").textContent="桌游名称："+deskGameName;
+    document.getElementById("store").textContent="所在店铺："+store;
+
+    document.getElementById("confirm").onclick = function (){
+        window.location.href = "deskGame_OrderSuccess"
+    }
+    document.getElementById("cancel").onclick = function (){
+        window.location.href = "deskGame_All"
+    }
+</script>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(140 140 140);
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        caption {
+            caption-side: bottom;
+            padding: 10px;
+            font-weight: bold;
+        }
+        thead,
+        tfoot {
+            background-color: rgb(228 240 245);
+        }
+        th,
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 8px 10px;
+        }
+        td {
+            height: 50px;
+        }
+        td:last-of-type {
+            text-align: center;
+        }
+        tbody > tr:nth-of-type(even) {
+            background-color: rgb(237 238 242);
+        }
+        tfoot th {
+            text-align: right;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<table id="dataTable1" style="width: 700px; position: fixed;left: 50px;top: 50px">
+    <thead>
+    <tr>
+        <th scope="col" style="width: 10%">用户ID</th>
+        <th scope="col" style="width: 25%">密码</th>
+        <th scope="col" style="width: 35%;">昵称</th>
+        <th scope="col" style="width: 10%">性别</th>
+        <th scope="col" style="width: 20%">电话</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<table id="dataTable2" style="width: 700px; position: fixed;left:830px;top: 50px">
+    <thead>
+    <tr>
+        <th scope="col" style="width: 10%">用户ID</th>
+        <th scope="col" style="width: 25%">密码</th>
+        <th scope="col" style="width: 35%;">昵称</th>
+        <th scope="col" style="width: 10%">性别</th>
+        <th scope="col" style="width: 20%">电话</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<div style="position: fixed;bottom: 50px;left: 725px;">
+    <button id="pre">上一页</button>
+    <label id="pageNumber"></label>
+    <button id="next">下一页</button>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+    const data = /*[[${dataList}]]*/ [];
+    console.log(data);
+
+    // const data = [
+    //     { UserId: "1000", UserPassword: "123456", UserName: "David", UserSex: "0", UserTelephone: "18616372036" },
+    //     { UserId: "1001", UserPassword: "pass123", UserName: "Alice", UserSex: "1", UserTelephone: "13912345678" },
+    //     { UserId: "1002", UserPassword: "abc123", UserName: "Bob", UserSex: "0", UserTelephone: "13612345678" },
+    //     { UserId: "1003", UserPassword: "password1", UserName: "Charlie", UserSex: "0", UserTelephone: "18512345678" },
+    //     { UserId: "1004", UserPassword: "myPassword", UserName: "Eve", UserSex: "1", UserTelephone: "18712345678" },
+    //     { UserId: "1005", UserPassword: "123abc", UserName: "Frank", UserSex: "0", UserTelephone: "18812345678" },
+    //     { UserId: "1006", UserPassword: "letmein", UserName: "Grace", UserSex: "1", UserTelephone: "18912345678" },
+    //     { UserId: "1007", UserPassword: "admin123", UserName: "Helen", UserSex: "1", UserTelephone: "13012345678" },
+    //     { UserId: "1008", UserPassword: "login123", UserName: "Ivan", UserSex: "0", UserTelephone: "13112345678" },
+    //     { UserId: "1009", UserPassword: "password123", UserName: "Julia", UserSex: "1", UserTelephone: "13212345678" },
+    //     { UserId: "1010", UserPassword: "sunshine", UserName: "Kevin", UserSex: "0", UserTelephone: "13312345678" },
+    //     { UserId: "1011", UserPassword: "12345", UserName: "Linda", UserSex: "1", UserTelephone: "13412345678" },
+    //     { UserId: "1012", UserPassword: "princess", UserName: "Mike", UserSex: "0", UserTelephone: "13512345678" },
+    //     { UserId: "1013", UserPassword: "123456789", UserName: "Nancy", UserSex: "1", UserTelephone: "13612345678" },
+    //     { UserId: "1014", UserPassword: "iloveyou", UserName: "Oliver", UserSex: "0", UserTelephone: "13712345678" },
+    //     { UserId: "1015", UserPassword: "password", UserName: "Paula", UserSex: "1", UserTelephone: "13812345678" },
+    //     { UserId: "1016", UserPassword: "1234", UserName: "Quinn", UserSex: "0", UserTelephone: "13912345678" },
+    //     { UserId: "1017", UserPassword: "monkey", UserName: "Rachel", UserSex: "1", UserTelephone: "14012345678" },
+    //     { UserId: "1018", UserPassword: "letmein1", UserName: "Steve", UserSex: "0", UserTelephone: "14112345678" },
+    //     { UserId: "1019", UserPassword: "12345678", UserName: "Tracy", UserSex: "1", UserTelephone: "14212345678" },
+    //     { UserId: "1020", UserPassword: "welcome", UserName: "Ulysses", UserSex: "0", UserTelephone: "14312345678" },
+    //     { UserId: "1021", UserPassword: "login", UserName: "Vera", UserSex: "1", UserTelephone: "14412345678" },
+    //     { UserId: "1022", UserPassword: "admin", UserName: "Walter", UserSex: "0", UserTelephone: "14512345678" },
+    //     { UserId: "1023", UserPassword: "1234567", UserName: "Xena", UserSex: "1", UserTelephone: "14612345678" },
+    //     { UserId: "1024", UserPassword: "iloveu", UserName: "Yuri", UserSex: "0", UserTelephone: "14712345678" },
+    //     { UserId: "1025", UserPassword: "master", UserName: "Zoe", UserSex: "1", UserTelephone: "14812345123" },
+    // ];
+    const gamesPerPage = 20;
+    let currentPage=1;
+
+    const currentPageText = document.getElementById("pageNumber");
+    currentPageText.textContent = currentPage;
+
+    function refreshPage(){
+
+        currentPageText.textContent = currentPage.toString();
+        const buttonPre = document.getElementById("pre");
+        const buttonNext = document.getElementById("next");
+
+        buttonPre.disabled = currentPage === 1;
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        tbody1.innerHTML = '';
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        tbody2.innerHTML = '';
+
+        buttonNext.disabled = currentPage === Math.ceil(data.length/gamesPerPage);
+        displayGames(currentPage, data)
+    }
+
+    function displayGames(page, data) {
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        const startIndex = (page-1)  * gamesPerPage;
+        const middleIndex = startIndex + gamesPerPage/2;
+        const endIndex = page * gamesPerPage;
+
+        for (let i = startIndex; i < middleIndex && i < data.length; i++) {
+
+            const row = tbody1.insertRow();
+
+            const item = data[i];
+
+            row.insertCell(0).textContent = item.UserId;
+            row.insertCell(1).textContent = item.UserPassword;
+            row.insertCell(2).textContent = item.UserName;
+            row.insertCell(3).textContent = item.UserSex;
+            row.insertCell(4).textContent = item.UserTelephone;
+
+        }
+
+        for (let i = middleIndex; i < endIndex && i < data.length; i++) {
+
+            const row = tbody2.insertRow();
+
+            const item = data[i];
+
+            row.insertCell(0).textContent = item.UserId;
+            row.insertCell(1).textContent = item.UserPassword;
+            row.insertCell(2).textContent = item.UserName;
+            row.insertCell(3).textContent = item.UserSex;
+            row.insertCell(4).textContent = item.UserTelephone;
+
+        }
+
+    }
+    function prePage(){
+        currentPage--;
+        refreshPage();
+    }
+    function nextPage(){
+        currentPage++;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+    function initializePageNumber(){
+        currentPage = 1;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+
+    document.getElementById('pre').addEventListener('click', prePage);
+    document.getElementById('next').addEventListener('click', nextPage);
+    // 初始化页面
+    window.onload = initializePageNumber;
+
+
+
+</script>
+
+
+</html>

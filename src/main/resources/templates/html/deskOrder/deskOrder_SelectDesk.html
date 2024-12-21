@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>SelectDesk</title>
+    <style>
+        .ContainerSelection{
+            height: 40px;
+            border: 1px solid #ccc;
+            background-color: white;
+            margin-left: 0;
+        }
+        .Store{
+            font-size: 24px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        .People{
+            font-size: 24px;
+            margin-left: 200px;
+            display: inline-block;
+        }
+
+        .ContainerExcel{
+            margin-top: 50px;
+            margin-left: 25%;
+            width:50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(140 140 140);
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        caption {
+            caption-side: bottom;
+            padding: 10px;
+            font-weight: bold;
+        }
+        thead,
+        tfoot {
+            background-color: rgb(228 240 245);
+        }
+        th,
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 8px 10px;
+        }
+        td:last-of-type {
+            text-align: center;
+        }
+        tbody > tr:nth-of-type(even) {
+            background-color: rgb(237 238 242);
+        }
+        tfoot th {
+            text-align: right;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ContainerSelection">
+        <div class="Store">
+            <label for="store">选择门店:</label>
+            <select id="store">
+                <option th:each="storeName : ${allStoreNames}" th:value="${storeName}" th:text="${storeName}" ></option>
+            </select>
+        </div>
+        <div class="People">
+            <label for="type">选择人数:</label>
+            <select id="type">
+                <option value="1-2">1-2</option>
+                <option value="3-6">3-6</option>
+                <option value="7-12">7-12</option>
+            </select>
+        </div>
+    </div>
+
+<div class="ContainerExcel">
+    <table id="dataTable">
+        <thead>
+        <tr>
+            <th scope="col">门店</th>
+            <th scope="col">编号</th>
+            <th scope="col">人数</th>
+            <th scope="col">价格</th>
+            <th scope="col">预约</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+    <script th:inline="javascript">
+    //数据源
+    const data = /*[[${dataList}]]*/ [];
+    console.log(data);
+
+    //根据FirstSelect的参数初始化选择框
+    function InitializeTable(){
+        let _store = localStorage.getItem('store');
+        let store = JSON.parse(_store);
+        localStorage.removeItem('store');
+
+        let _type = localStorage.getItem('type');
+        let type = JSON.parse(_type);
+        localStorage.removeItem('type');
+        
+
+        const selectElement1 = document.getElementById('store');
+        selectElement1.value = store;
+        const selectElement2 = document.getElementById('type');
+        selectElement2.value = type;
+
+        console.log(selectElement1.value);
+        console.log(selectElement2.value);
+
+        displayData();
+    }
+
+    //用户在该界面更改选择框内容，重新选择
+    function RefreshTable() {
+        const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+        tbody.innerHTML = ''; // 清空表格
+        displayData();
+    }
+
+    // 显示数据
+    function displayData() {
+        //读取选择框数据
+        const selector1Value = document.getElementById('store').value;
+        const selector2Value = document.getElementById('type').value;
+
+        //筛选数据
+        const filteredData = data.filter(item => {
+            return item.store === selector1Value && item.type === selector2Value;
+        });
+
+        if(filteredData==null)alert("NULL");//未找到相关数据弹窗报错
+
+        const tbody = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+        tbody.innerHTML = '';
+
+        //插入筛选数据
+        filteredData.forEach(item => {
+            const row = tbody.insertRow();
+            row.insertCell(0).textContent = item.store;
+            row.insertCell(1).textContent = item.id;
+            row.insertCell(2).textContent = item.type;
+            row.insertCell(3).textContent = item.price;
+
+            //插入预约按钮
+            let newCell = row.insertCell(4);
+            let newButton = document.createElement('button');
+            newButton.type = 'button';
+            newButton.textContent = '预约';
+
+            //点击后将本行数据传入时间选择界面并跳转
+            newButton.onclick = function() {
+
+                const store = item.store;
+                const type = item.type;
+                const id = item.id;
+                const price = item.price;
+
+                localStorage.setItem('store', JSON.stringify(store));
+                localStorage.setItem('type', JSON.stringify(type));
+                localStorage.setItem('id', JSON.stringify(id));
+                localStorage.setItem('price', JSON.stringify(price));
+
+                window.location.href = 'deskOrder_SelectTime';
+            };
+            newCell.appendChild(newButton);
+        });
+    }
+
+    // 监听选择框变化
+    document.getElementById('store').addEventListener('change', RefreshTable);
+    document.getElementById('type').addEventListener('change', RefreshTable);
+
+    // 页面加载时初始化表格
+    window.onload = InitializeTable;
+</script>
+
+</body>
+</html>

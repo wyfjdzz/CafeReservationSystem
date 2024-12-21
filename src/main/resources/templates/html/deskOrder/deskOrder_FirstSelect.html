@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>deskOrder_FirstSelect</title>
+
+    <script>
+        function RedirectToPage() {
+
+            //读取当前选择器的值
+            const store = document.getElementById('store').value;
+            const type = document.getElementById('type').value;
+
+            //存入本地
+            localStorage.setItem('store', JSON.stringify(store));
+            localStorage.setItem('type', JSON.stringify(type));
+
+            //跳转
+            window.location.href = 'deskOrder_SelectDesk';
+        }
+    </script>
+
+    <style>
+        .ContainerSelection{
+            height: 150px;
+            width:50%;
+            border: 1px solid #ccc;
+            background-color: white;
+            margin-top:150px;
+            margin-left: 25%;
+        }
+        .Store{
+            font-size: 24px;
+            text-align: center;
+        }
+        .People{
+            font-size: 24px;
+            text-align: center;
+        }
+        .ButtonConfirm{
+            height:40px;
+            width: 80px;
+            font-size: 24px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="ContainerSelection">
+    <div class="Store">
+        <label for="store">请选择门店:</label>
+        <select id="store">
+            <option th:each="storeName : ${allStoreNames}" th:value="${storeName}" th:text="${storeName}" ></option>
+        </select>
+    </div>
+
+    <br>
+
+    <div class="People">
+        <label for="type">请选择人数:</label>
+        <select id="type" name="type">
+            <option value="1-2">1-2</option>
+            <option value="3-6">3-6</option>
+            <option value="7-12">7-12</option>
+        </select>
+    </div>
+
+</div>
+
+<button class="ButtonConfirm" onclick=RedirectToPage()>确认</button>
+
+
+
+</body>
+</html>

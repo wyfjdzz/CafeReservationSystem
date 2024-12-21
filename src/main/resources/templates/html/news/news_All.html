@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(140 140 140);
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        caption {
+            caption-side: bottom;
+            padding: 10px;
+            font-weight: bold;
+        }
+        thead,
+        tfoot {
+            background-color: rgb(228 240 245);
+        }
+        th,
+        td {
+            border: 1px solid rgb(160 160 160);
+            padding: 8px 10px;
+        }
+        td {
+            height: 50px;
+        }
+        td:last-of-type {
+            text-align: center;
+        }
+        tbody > tr:nth-of-type(even) {
+            background-color: rgb(237 238 242);
+        }
+        tfoot th {
+            text-align: right;
+        }
+        tfoot td {
+            font-weight: bold;
+        }
+
+        .button-as-link {
+            display: inline-block;
+            text-decoration: none; /* 移除下划线 */
+            color: #0066cc; /* 蓝色文本，类似超链接的颜色 */
+            background-color: transparent; /* 透明背景 */
+            border: none; /* 无边框 */
+            padding: 0; /* 无填充 */
+            margin: 0; /* 无边距 */
+            cursor: pointer; /* 鼠标样式为指针 */
+            font-size: 1em; /* 字体大小 */
+            line-height: 1.5; /* 行高 */
+        }
+
+        /* 鼠标悬停时的样式 */
+        .button-as-link:hover {
+            text-decoration: underline; /* 添加下划线 */
+            color: #0000ee; /* 加深颜色 */
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+<table id="dataTable1" style="width: 700px; position: fixed;left: 50px;top: 50px">
+    <thead>
+    <tr>
+        <th scope="col" style="width: 15%">发布日期</th>
+        <th scope="col" style="width: 25%">标题</th>
+        <th scope="col" style="width: 45%;">内容简述</th>
+        <th scope="col" style="width: 15%">作者</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<table id="dataTable2" style="width: 700px; position: fixed;left:830px;top: 50px">
+    <thead>
+    <tr>
+        <th scope="col" style="width: 15%">发布日期</th>
+        <th scope="col" style="width: 25%">标题</th>
+        <th scope="col" style="width: 45%;">内容简述</th>
+        <th scope="col" style="width: 15%">作者</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<div style="position: fixed;bottom: 50px;left: 725px;">
+    <button id="pre">上一页</button>
+    <label id="pageNumber"></label>
+    <button id="next">下一页</button>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+    const news = /*[[${newList}]]*/ [];
+    console.log(news);
+
+    const gamesPerPage = 20;
+    let currentPage=1;
+
+    const currentPageText = document.getElementById("pageNumber");
+    currentPageText.textContent = currentPage;
+
+    function refreshPage(){
+
+        currentPageText.textContent = currentPage.toString();
+        const buttonPre = document.getElementById("pre");
+        const buttonNext = document.getElementById("next");
+
+        buttonPre.disabled = currentPage === 1;
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        tbody1.innerHTML = '';
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        tbody2.innerHTML = '';
+
+        buttonNext.disabled = currentPage === Math.ceil(news.length/gamesPerPage);
+        displayGames(currentPage, news)
+    }
+
+    function displayGames(page, news) {
+
+        const tbody1 = document.getElementById('dataTable1').getElementsByTagName('tbody')[0];
+        const tbody2 = document.getElementById('dataTable2').getElementsByTagName('tbody')[0];
+        const startIndex = (page-1)  * gamesPerPage;
+        const middleIndex = startIndex + gamesPerPage/2;
+        const endIndex = page * gamesPerPage;
+
+        for (let i = startIndex; i < middleIndex && i < news.length; i++) {
+
+            const row = tbody1.insertRow();
+
+            const item = news[i];
+
+            row.insertCell(0).textContent = item.dataTime
+
+            let newCell = row.insertCell(1);
+
+            let hyperlink = document.createElement('a');
+            hyperlink.href = "news_Detail";
+            hyperlink.textContent = item.title;
+
+
+            //这里是本地存储，id用于查找数据库中的正文内容，其他三个用于UI显示
+            hyperlink.onclick = function (event){
+                event.preventDefault();
+                localStorage.setItem('newsID', JSON.stringify(item.newId));
+                localStorage.setItem('title', JSON.stringify(item.title));
+                localStorage.setItem('author', JSON.stringify(item.author));
+                localStorage.setItem('dataTime', JSON.stringify(item.dataTime));
+                window.location.href="news_Detail"
+            }
+
+
+            newCell.append(hyperlink);
+
+            row.insertCell(2).textContent = item.content
+            row.insertCell(3).textContent = item.author;
+        }
+
+        for (let i = middleIndex; i < endIndex && i < news.length; i++) {
+            const row = tbody2.insertRow();
+
+            const item = news[i];
+
+            row.insertCell(0).textContent = item.dataTime
+
+            let newCell = row.insertCell(1);
+
+            let hyperlink = document.createElement('a');
+            hyperlink.href = "news_Detail";
+            hyperlink.textContent = item.title;
+
+            newCell.append(hyperlink);
+
+            row.insertCell(2).textContent = item.content
+            row.insertCell(3).textContent = item.author;
+        }
+    }
+    function prePage(){
+        currentPage--;
+        refreshPage();
+    }
+    function nextPage(){
+        currentPage++;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+    function initializePageNumber(){
+        currentPage = 1;
+        currentPageText.textContent = currentPage.toString();
+        refreshPage();
+    }
+
+    document.getElementById('pre').addEventListener('click', prePage);
+    document.getElementById('next').addEventListener('click', nextPage);
+    // 初始化页面
+    window.onload = initializePageNumber;
+
+
+
+</script>
+
+
+</html>

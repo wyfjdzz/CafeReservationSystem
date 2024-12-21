@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ContainerInputPart{
+            top: 50px;
+            width: 50%;
+            margin-left: 25%;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class = "ContainerInputPart">
+
+    <form>
+
+        <label for="gameName">桌游名称：</label>
+        <input type="text" id="gameName" style="width: 400px;height: 24px;font-size: 20px;" required>
+        <br>
+        <br>
+
+        <label for="storeName">选择门店:</label>
+        <select name="storeName" id="storeName" style="width: 50px;height: 25px;font-size: 20px;">
+            <option value="null">无</option>
+        </select>
+        <br>
+        <br>
+
+        <label for="peopleLeast">人数：</label>
+        <input type="text" id="peopleLeast" style="width: 50px;height: 25px;font-size: 20px;" required>
+
+        <label for="peopleMost"> -- </label>
+        <input type="text" id="peopleMost" style="width: 50px;height: 25px;font-size: 20px;" required>
+        <br>
+        <br>
+
+        <label for="type1">选择类型1:</label>
+        <select name="type1" id="type1" style="width: 50px;height: 25px;font-size: 20px;">
+            <option value="null">无</option>
+        </select>
+
+        <label for="type2">选择类型2:</label>
+        <select name="type2" id="type2" style="width: 50px;height: 25px;font-size: 20px;">
+            <option value="null">无</option>
+        </select>
+
+        <label for="type3">选择类型3:</label>
+        <select name="type3" id="type3" style="width: 50px;height: 25px;font-size: 20px;">
+            <option value="null">无</option>
+        </select>
+        <br>
+        <br>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="gameDescription">游戏简介（100字以内）：</label>
+            <textarea id="gameDescription" cols="25" rows="4" style="height: 100px;width: 300px;font-size: 20px;" required></textarea>
+        </div>
+        <br>
+        <br>
+
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <label for="gameDetails">玩法简述（100字以内）：</label>
+            <textarea id="gameDetails" cols="25" rows="4" style="height: 100px;width: 300px;font-size: 20px;" required></textarea>
+        </div>
+        <br>
+        <br>
+    </form>
+    <input type="submit" id="submit" value="提交" style="font-size: 24px">
+</div>
+
+<script th:inline="javascript">
+    //门店选项列表(可变）
+    const storeOptions = /*[[${allStoreNames}]]*/ [];
+    //桌游类型选项列表(可变）
+    const typeOptions = /*[[${allTagNames}]]*/ [];
+    console.log(storeOptions);
+    console.log(typeOptions);
+
+    let selectorStore = document.getElementById("storeName");
+    let selectorType1 = document.getElementById("type1");
+    let selectorType2 = document.getElementById("type2");
+    let selectorType3 = document.getElementById("type3");
+
+    storeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorStore.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType1.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType2.appendChild(newOption);
+    });
+
+    typeOptions.forEach(function(option) {
+        let newOption = document.createElement('option');
+        newOption.value = option;
+        newOption.textContent = option;
+        selectorType3.appendChild(newOption);
+    });
+
+    const submitButton = document.getElementById("submit")
+    submitButton.onclick = function (){
+        const params = new URLSearchParams({
+            gameName: document.getElementById("gameName").value,
+            storeName: document.getElementById("storeName").value,
+            peopleLeast: document.getElementById("peopleLeast").value,
+            peopleMost: document.getElementById("peopleMost").value,
+            type1: document.getElementById("type1").value,
+            type2: document.getElementById("type2").value,
+            type3: document.getElementById("type3").value,
+            gameDescription: document.getElementById("gameDescription").value,
+            gameDetails: document.getElementById("gameDetails").value
+        });
+        console.log(params.toString());
+        fetch("/UpdateSuccess?" + params.toString(), {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        window.location.href = "Manager_GameManage_UpdateSuccess";
+    }
+</script>
+
+
+</body>
+</html>
